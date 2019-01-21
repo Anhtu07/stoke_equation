@@ -1,10 +1,10 @@
 tic;
 Pen=10^10;
-nx = 1024;
-ny = 1024;
+nx = 64;
+ny = 64;
 pex=0.317;pey=0.910;
 [u1exy, u2exy, pexy, f1, f2, alpha, nu] = func(pex, pey);
-[xy,th,pbx,pby,hx,hy]=kpde2dumsh(0,3,0,1,nx,ny);
+[xy,th,pbx,pby,hx,hy]=kpde2dumsh(0,1,0,1,nx,ny);
 ibc1=union(pbx(:,1),pbx(:,2)); ibc2= union(pby(:,1),pby(:,2));
 ibcd=union(ibc1,ibc2);
 np=size(xy,1); nt=size(th,1);
@@ -57,8 +57,8 @@ fprintf('Sai so L2 cua p: ');
 l2e_p
 
 subplot(121);
-trisurf(th,xy(:,1),xy(:,2),u1e,'facecolor','interp');
+trisurf(th,xy(:,1),xy(:,2),u2e-u2,'facecolor','interp');
 
 subplot(122);
-trisurf(th,xy(:,1),xy(:,2),u1,'facecolor','interp');
+trisurf(th,xy(:,1),xy(:,2),u2,'facecolor','interp');
 

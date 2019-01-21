@@ -10,8 +10,7 @@
 \usepackage[intlimits]{amsmath}
 \usepackage{array}
 \usepackage{amsxtra,amssymb,latexsym,amscd,amsthm}
-\usepackage{algorithm}
-\usepackage{algorithmic}
+\usepackage{hyperref}
 \newtheorem{theorem}{\MakeUppercase{K}ết quả}[section]
 % khoảng cách dòng 1.5 lines (như trong MS Word)
 \renewcommand{\baselinestretch}{1.5}
@@ -58,6 +57,14 @@
 \newpage
 
 %\listoffigures
+
+\newpage
+{\huge \textbf{Lời mở đầu}} \\
+
+Phương trình Navier-Stokes có ý nghĩa quan trọng trong vật lý, nó miêu tả dòng chảy của các chất lỏng và khi, còn gọi chất lưu. Phương trình được thiết lập trên cơ sở biến thiên động lượng trong những thể tích vô cùng nhỏ của chất lưu, gồm tổng của các lực nhớ, biến đổi áp suất, trọng lực và các ngoại lực khác tác động lên chất lưu. Trong phạm vi của bài báo cáo này, nhóm thực hiện xin được trình bày một trường đặc biệt của phương vật lý chuyển động của chất lỏng, phương trình Stokes trong không gian 2 chiều. \\
+
+Bên cạnh việc thực hiện chương trình giải bài toán Stokes bằng phương pháp phần tử hữu hạn, trong bài báo cáo này còn trình bày cơ sở lý thuyết xây dựng nên bài toán yếu, tính đặt chỉnh bài toán Stokes. \\
+
 
 \newpage
 \chapter{Kiến thức cơ sở}
@@ -225,7 +232,7 @@ Chọn hàm thử $v \in [ H_0^1(\Omega) ]^2$, vì $u$ bằng 0 trên biên $\Ga
 Đặt :
 $$\alpha(u, v) = 2 \sum_{k,j = 1}^2 \int_{\Omega} e_{kj}(u,x) e_{kj} (v,x)$$
 $$\beta(v, q) = \int_{\Omega} q(x) \ div \ v dx$$
-Ta thấy rằng nghiệm của $p(x)$ có thể sai khác nhau một hằng số, do đó đặt $Q = {q(x) |in L_2(\Omega) \ và \ \int_{\Omega} q(x) dx = 0 }$. Ta có bài toán yếu cho phương trình Stoke: \\
+Ta thấy rằng nghiệm của $p(x)$ có thể sai khác nhau một hằng số, do đó đặt $Q = \{q(x) |\in L_2(\Omega) \ and \ \int_{\Omega} q(x) dx = 0 \}$. Ta có bài toán yếu cho phương trình Stoke: \\
 Tìm hàm $u \in  [ H_0^1(\Omega) ]^2$ và hàm $p \in Q$ sao cho
 $$
 \begin{cases}
@@ -283,8 +290,8 @@ Hệ phương trình trên đặt chỉnh (well-posed) khi và chỉ khi
 và $\forall w \in ker(B)$, nếu $\alpha(v, w) = 0$ với mọi $v \in ker(B)$ thì w = 0
 \end{center}
 \end{theorem}
-
-Ở đây, ta thấy rằng, nếu $\alpha(u, v)$ là $V-elliptic$ thì khí đó điều kiện thứ nhất và điều kiện thứ ba dễ dàng được thỏa mãn
+\newpage
+Ở đây, ta thấy rằng, nếu $\alpha(u, v)$ là $V-elliptic$ thì khí đó điều kiện thứ nhất và điều kiện thứ ba dễ dàng được thỏa mãn. Trở lại với bài toán Stoke, ta dễ dàng chứng minh được $\alpha(u, v)$ là $[H_0^1]^2 - elliptic$. Do đó, để bài toán Stoke có nghiệm duy nhất ta chỉ cần phải kiểm tra điều kiên số 2 (điều kiện inf-sup). Và người ta cũng chứng minh được bài toán Stoke được định nghĩa như phần 1 thỏa mãn điều kiện inf-sup.
 \chapter{Phương trình Stoke bằng phương pháp phần tử hữu hạn}
 \section{Phần tử hữu hạn cho bài toán Stoke}
 Trong phần này, ta đi giải bài toán yếu của phương trình stoke bằng phương pháp phần tử hữu hạn, tức là ta đi tìm hàm $u_h$, $v_h$ thuộc vào hai không gian con hữu hạn chiều $V_h$, $Q_h$ của $[ H_0^1(\Omega) ]^2$ và $L_2(\Omega)$ thỏa mãn phương trình
@@ -589,6 +596,60 @@ f_i^{(T)} = \frac{|T|}{3} f_{iT}
 trong đó $f_{iT}$ là giá trị trung bình của hàm $f_i$ trên tam giác $T$
 $$f_{iT} = (f_i(x_1) + f_i(x_2) + f_i(x_3))$$
 
-\chapter{Kết quả}
+\chapter{Kết quả thực nghiệm}
+Chương trình Matlab giải phương trình Stoke được miêu tả trong báo cáo có thể download tại \url{https://github.com/Anhtu07/stoke_equation} \\
 
+Các ví dụ được trình bày dưới đây giải bài toán Stoke trên miền $\Omega = [0, 1] \mathbf{x}[0, 1]$. Trong bảng ở trang tiếp theo, \textbf{n} là số phần mà cạnh của hình vuông được chia ra, \textbf{n.o.e} là số phần tử hữu hạn trên miền $\Omega$. \textit{eoc} là được tính bằng loga cơ số 2 của của thương hai số liên tiếp để đánh giá tốc độ của thuật toán. \textit{Totaltime} là thời gian chạy toàn bộ chương trình (bao gồm cả phàn xây dựng ma trận và giải), còn \textit{Solvetime} là thời gian chương trình giải hệ phương trình tuyến tính. Do ma trận được xây dựng không thỏa mãn điều kiện xác định dương, nên việc giải hệ phương trình được thực hiện bằng phương pháp Gauss.
+\newpage
+\textbf{Ví dụ 1}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.55]{VD1}
+\caption{}
+\end{figure}
+
+Trong hình 4.2, đồ thị bên trái là nghiệm xấp xỉ thu được, còn đồ thị bên phải là nghiệm đúng của phương trình. \\
+
+Để quan sát được rõ hơn độ sai lệch giữa nghiệm tìm được và nghiệm đúng của $u_1$, hình 4.3 biểu diễn đồ thị hiệu hai nghiệm. Nghiệm gần đúng được tính sử dụng 7938 phần tử hữu hạn \\
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{450_tri_1}
+\caption{ Nghiệm xấp xỉ và Nghiệm đúng}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{sub1}
+\caption{ Hiệu hai nghiệm}
+\end{figure}
+\newpage
+Trong bảng (hình 4.1) ta có chú rằng sai số của $L_2$ của $u_1$ và $u_2$ bằng nhau. Điều này là do hai hàm $u_1$, $u_2$ đối xứng với nhau. Ở trong ví dú 2, ta xem xét hai hàm không đối xứng với nhau. \\
+
+\textbf{Ví dụ 2}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.55]{VD2}
+\caption{}
+\end{figure}
+
+Các hình tiếp theo biểu diễn nghiệm xấp xỉ và nghiệm đúng của $u_2$ thu được khi chạy ví dụ 2.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{450_tri_2}
+\caption{}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{sub2}
+\caption{}
+\end{figure}
+\newpage
+
+Cuối cùng, ta có nhận xét về sai số $L_2$ đối với phương pháp phần tử hữu hạn sử dụng $P_1-bubble / P_1$ rằng sai số của của $u$ của $p$ tuân theo kết quả chứng minh được từ lý thuyết với tốc độ hội tụ của $u$ là $O(h^2)$ còn của $p$ là $O(h^{3/2}$. Còn về sai số điểm, nhóm làm báo cáo chưa tìm thấy kết quả về vấn đề này, và thực nghiệm thì không cho ra được dự đoán nào về tốc độ hội tụ của sai số điểm. \\[1cm]
+
+{\huge \textbf{Tài liệu tham khảo}} \\
+$[1]$ D.N Arnold, F. Brezzi, M. Fortin, A stable finite element for the Stokes Equations \\
+$[2]$ F. Brezzi, On the existence, uniqueness and approximation of  saddle point problems arising from Lagrangian multipliers \\
+$[3]$ Janas Koko, Stokes problem with $P^1-bubble/P^1$ Finite Element\\
+$[4]$ Alexandre Ern, Jean-Luc Guermond, Theory and Practice of Finite Elements
 \end{document}
