@@ -1,5 +1,6 @@
 Matlab code using finite element method for solving Stoke Equation of the form:
 
+$$\delta$$
 -\delta u + grad p = f
 
 u on the boundary of D equal 0
